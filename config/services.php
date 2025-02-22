@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'stumv' => [
+        // using socialiteproviders/laravelpassport
+        'client_id' => env('STUMV_CLIENT_ID'),
+        'client_secret' => env('STUMV_CLIENT_SECRET'),
+        'redirect' => rtrim((string) env('APP_URL', 'http://localhost:8000'), '/').'/auth/callback',
+        'host' => env('STUMV_HOST'),
+        'logout_path' => env('STUMV_LOGOUT_PATH', 'logout'),
+        'group-mapping' => [
+            'login' => env('STUMV_GROUP_LOGIN', 'login'),
+            'admin' => env('STUMV_GROUP_ADMIN'),
+        ],
+    ],
+
 ];

@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
+Route::view('/dashboard', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth'])->group(function (): void {
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
-require __DIR__.'/auth.php';
+});
+
+// login routes
+Route::get('auth/login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');
+Route::get('auth/callback', [\App\Http\Controllers\Auth\AuthController::class, 'callback'])->name('login.callback');
+Route::get('auth/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout')->middleware(['auth']);
