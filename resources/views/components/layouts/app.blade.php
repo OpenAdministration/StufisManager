@@ -11,6 +11,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @fluxAppearance
+    @livewireStyles
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
 <flux:sidebar sticky stashable class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
@@ -22,8 +23,7 @@
     <flux:navlist variant="outline">
         <flux:navlist.item icon="home" href="#" current>Home</flux:navlist.item>
         <flux:navlist.item icon="inbox" badge="12" href="#">Inbox</flux:navlist.item>
-        <flux:navlist.item icon="document-text" href="#">Documents</flux:navlist.item>
-        <flux:navlist.item icon="calendar" href="#">Calendar</flux:navlist.item>
+        <flux:navlist.item icon="document-text" href="{{ route('instances') }}">Instanzen</flux:navlist.item>
 
         <flux:navlist.group expandable heading="Favorites" class="hidden lg:grid">
             <flux:navlist.item href="#">Marketing site</flux:navlist.item>
@@ -81,4 +81,5 @@
 </flux:main>
 
 @fluxScripts
+@livewireScripts
 </body>
