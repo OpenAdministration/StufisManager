@@ -3,15 +3,13 @@
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
-Route::view('/profile', 'welcome')->name('profile');
-
-Route::view('dashboard', 'dashboard')
+Route::view('/', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('home');
 
 Route::middleware(['auth'])->group(function () {
-
+    Route::get('/instances', \App\Livewire\Pages\Instances\TableView::class)->name('instances');
+    Route::get('/instances/new', \App\Livewire\Pages\Instances\Create::class)->name('instances.create');
 });
 
 

@@ -48,4 +48,9 @@ return [
         ],
     ],
 
+    'hostsharing' => [
+        'user' => env('HS_USER'),
+        'password' => env('HS_PASSWORD'),
+    ],
+
 ];
