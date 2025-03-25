@@ -114,5 +114,4 @@ return [
 
     'service' => env('AUTH_SERVICE'),
 
-
 ];

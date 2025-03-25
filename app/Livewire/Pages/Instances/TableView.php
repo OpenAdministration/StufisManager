@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\Instances;
 
-use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class TableView extends Component
@@ -10,9 +9,11 @@ class TableView extends Component
     use \Livewire\WithPagination;
 
     public $sortBy = 'realm';
+
     public $sortDirection = 'desc';
 
-    public function sort($column) {
+    public function sort($column)
+    {
         if ($this->sortBy === $column) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
@@ -21,7 +22,7 @@ class TableView extends Component
         }
     }
 
-    public function render() : \Illuminate\View\View
+    public function render(): \Illuminate\View\View
     {
         return view('livewire.pages.instances.index');
     }

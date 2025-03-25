@@ -28,9 +28,7 @@
                     </flux:table.cell>
 
                     <flux:table.cell>
-                        <flux:modal.trigger name="search">
-                            <flux:button variant="ghost" size="sm" icon="arrow-right" inset="top bottom"/>
-                        </flux:modal.trigger>
+                        <flux:button :href="route('instances.report', $instance->id)" variant="ghost" size="sm" icon="arrow-right" inset="top bottom"/>
                     </flux:table.cell>
                 </flux:table.row>
             @endforeach

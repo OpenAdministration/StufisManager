@@ -16,8 +16,8 @@ class ValidUsername implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // full pattern: ^([a-z]{3}[0-9]{2})-([a-z0-9_]{2,20})$
-        if(!Regex::match('/^([a-z0-9_]{2,20})$/', $attribute)->hasMatch()){
-            $fail(":attribute is not a valid username.");
+        if (! Regex::match('/^([a-z0-9_]{2,20})$/', $attribute)->hasMatch()) {
+            $fail(':attribute is not a valid username.');
         }
     }
 }

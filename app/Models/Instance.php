@@ -13,6 +13,6 @@ class Instance extends Model
         'name',
         'realm',
         'linux_user',
-        'domain'
+        'domain',
     ];
 }

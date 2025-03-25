@@ -12,8 +12,5 @@ class UniqueUser implements ValidationRule
      *
      * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function validate(string $attribute, mixed $value, Closure $fail): void
-    {
-
-    }
+    public function validate(string $attribute, mixed $value, Closure $fail): void {}
 }

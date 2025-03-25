@@ -4,7 +4,6 @@ namespace App\Livewire\Pages\Instances;
 
 use App\Models\Instance;
 use App\Rules\Hostsharing\ValidUsername;
-use App\Services\Hostsharing\HostsharingScripts;
 use Livewire\Component;
 
 class Create extends Component
@@ -18,6 +17,7 @@ class Create extends Component
     public $domain;
 
     public bool $create_on_hostsharing = false;
+
     public bool $create_on_stumv = false;
 
     public function render()
@@ -25,11 +25,12 @@ class Create extends Component
         return view('livewire.pages.instances.create');
     }
 
-    public function rules() : array {
+    public function rules(): array
+    {
         return [
             'name' => 'required|min:3|unique:instances,name',
             'realm' => 'required|min:3',
-            'linux_user' => ['required', new ValidUsername(), 'unique:instances,linux_user'],
+            'linux_user' => ['required', new ValidUsername, 'unique:instances,linux_user'],
             'domain' => 'required',
         ];
     }

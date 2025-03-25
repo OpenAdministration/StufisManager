@@ -10,8 +10,8 @@ Route::view('/', 'dashboard')
 Route::middleware(['auth'])->group(function () {
     Route::get('/instances', \App\Livewire\Pages\Instances\TableView::class)->name('instances');
     Route::get('/instances/new', \App\Livewire\Pages\Instances\Create::class)->name('instances.create');
+    Route::get('/instances/{instance_id}', \App\Livewire\Pages\Instances\Report::class)->name('instances.report');
 });
-
 
 // login routes
 Route::get('auth/login', [AuthController::class, 'login'])->name('login');

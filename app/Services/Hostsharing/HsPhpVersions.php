@@ -2,7 +2,7 @@
 
 namespace App\Services\Hostsharing;
 
-enum HsPhpVersions : string
+enum HsPhpVersions: string
 {
     case PHP80 = '/usr/lib/cgi-bin/php8.0';
     case PHP81 = '/usr/lib/cgi-bin/php8.1';

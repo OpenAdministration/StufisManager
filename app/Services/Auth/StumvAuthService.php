@@ -63,6 +63,7 @@ class StumvAuthService extends AuthService
             'iban' => $attributes['iban'] ?? '',
             'address' => $attributes['address'] ?? '',
         ];
+
         return [$identifiers, $userAttributes];
     }
 
