@@ -109,5 +109,9 @@ dataset('hs output', [
                 'validsubdomainnames' => '*',
             ]
         ]
-    ], // last dataset
+    ], [ // next dataset
+        "Password: *****
+[]",
+        [],
+    ] // last dataset
 ]);

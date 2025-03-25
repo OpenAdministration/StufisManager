@@ -32,17 +32,19 @@ class ScriptOutputTransformer
         return $ret;
     }
 
-    public function parse($input): Collection
+    public function parse($input): ?Collection
     {
         $this->lexer->setInput($input);
+        // has to be called double
+        $this->lexer->moveNext();
         $this->lexer->moveNext();
 
-        $this->lexer->moveNext();
-        $token = $this->lexer->token;
-
-        return match ($token?->type) {
-            ScriptOutputLexer::T_BEGIN_ARRAY => collect($this->newArray()),
-        };
+        // needed to skip intro text which might appear, like "Password: *****"
+        if($this->lexer->token->type !== ScriptOutputLexer::T_BEGIN_ARRAY){
+            $this->lexer->skipUntil(ScriptOutputLexer::T_BEGIN_ARRAY);
+            $this->lexer->moveNext();
+        }
+        return collect($this->newArray());
     }
 
     private function newObject(): object
