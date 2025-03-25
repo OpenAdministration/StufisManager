@@ -2,6 +2,7 @@
 
 namespace App\Services\Hostsharing;
 
+use Illuminate\Log\Logger;
 use Illuminate\Support\Collection;
 use stdClass;
 
@@ -86,7 +87,7 @@ class ScriptOutputTransformer
         if($string === 'true' || $string === 'false') {
             return $string === 'true';
         }
-        if(is_numeric($string)) {
+        if(is_numeric($string) && !empty($string)) {
             return (int) $string;
         }
         return $string;

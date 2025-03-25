@@ -25,7 +25,7 @@ class ScriptOutputLexer extends AbstractLexer
     {
         return [
             "[{}\[\]:]", // delimiter
-            "[a-zA-Z0-9@\/\.\-_;]+", // strings
+            "'?[a-zA-Z0-9@\/\.\-_;]+'?", // strings
         ];
     }
 
@@ -39,7 +39,6 @@ class ScriptOutputLexer extends AbstractLexer
             ',\\n',
             '\\n',
             "\s",
-            "'",
             ',',
         ];
     }

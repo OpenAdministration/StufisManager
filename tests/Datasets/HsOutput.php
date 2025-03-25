@@ -113,5 +113,9 @@ dataset('hs output', [
         "Password: *****
 []",
         [],
-    ] // last dataset
+    ], [
+        "[{validsubdomainnames:''}]"
+    , [
+        ['validsubdomainnames' => '']
+    ]] // last dataset
 ]);

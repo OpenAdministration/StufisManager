@@ -5,7 +5,7 @@ use App\Services\Hostsharing\ScriptOutputTransformer;
 it('splits tokens correctly', function () {
     $transformer = new ScriptOutputTransformer;
     expect($transformer->splitToken("[{test:'test'}]"))->toBe([
-        '[', '{', 'test', ':', 'test', '}', ']',
+        '[', '{', 'test', ':', "'test'", '}', ']',
     ]);
 });
 
@@ -18,7 +18,7 @@ it('ignores whitespace and seperators correctly', function () {
     ";
     $transformer = new ScriptOutputTransformer;
     expect($transformer->splitToken($string))->toBe([
-        '[', '{', 'test', ':', 'test', '}', ']',
+        '[', '{', 'test', ':', "'test'", '}', ']',
     ]);
 });
 
@@ -30,6 +30,17 @@ it('generates correct object from tokens', function () {
         ->toBeObject()
         ->toMatchObject([
             'test' => 'test',
+        ]);
+});
+
+it('works with empty strings', function () {
+    $transformer = new ScriptOutputTransformer;
+    $res = $transformer->parse("[{test:''}]");
+    expect($res instanceof \Illuminate\Support\Collection)->toBeTrue('Is not a collection');
+    expect($res[0])
+        ->toBeObject()
+        ->toMatchObject([
+            'test' => '',
         ]);
 });
 
