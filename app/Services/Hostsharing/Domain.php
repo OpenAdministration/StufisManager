@@ -39,7 +39,7 @@ class Domain
         return new HostsharingScripts('domain');
     }
 
-    public static function search($filter): Collection
+    public static function search($filter): Collection|string
     {
         return self::query()->where($filter)->execute('search');
     }

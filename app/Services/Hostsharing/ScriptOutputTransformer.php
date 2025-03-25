@@ -2,6 +2,7 @@
 
 namespace App\Services\Hostsharing;
 
+use Illuminate\Support\Collection;
 use stdClass;
 
 class ScriptOutputTransformer
@@ -13,7 +14,7 @@ class ScriptOutputTransformer
         $this->lexer = $lexer ?? new ScriptOutputLexer;
     }
 
-    public static function transform($input): array|object
+    public static function transform($input): Collection|string
     {
         return (new ScriptOutputTransformer())->parse($input);
     }
@@ -31,8 +32,11 @@ class ScriptOutputTransformer
         return $ret;
     }
 
-    public function parse($input): array|object
+    public function parse($input): Collection|string
     {
+        if(!str_starts_with($input, '[')) {
+            return "NO MATCH FOR: $input";
+        }
         $this->lexer->setInput($input);
         $this->lexer->moveNext();
 
@@ -40,8 +44,7 @@ class ScriptOutputTransformer
         $token = $this->lexer->token;
 
         return match ($token->type) {
-            ScriptOutputLexer::T_BEGIN_OBJECT => $this->newObject(),
-            ScriptOutputLexer::T_BEGIN_ARRAY => $this->newArray(),
+            ScriptOutputLexer::T_BEGIN_ARRAY => collect($this->newArray()),
         };
     }
 

@@ -17,13 +17,12 @@ abstract class Runner
 
     public function __construct(public Instance $instance){}
 
-    public function run(): void {
-        $this->action();
+    public function run(): Report {
+        $this->result = $this->action();
         $this->beforeSave();
-        $result = $this->save();
+        $report = $this->save();
         $this->afterSave();
-
-
+        return $report;
     }
 
     /**

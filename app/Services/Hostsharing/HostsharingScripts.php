@@ -17,7 +17,7 @@ class HostsharingScripts
 
     protected Collection $set;
 
-    public function execute($function = 'search'): Collection
+    public function execute($function = 'search'): Collection|string
     {
         $user = config('services.hostsharing.user');
         $options = collect()->put('where', $this->where)->put('set', $this->set)->toJson();
@@ -26,7 +26,7 @@ class HostsharingScripts
             ->run("hsscript -u $user -e \"$this->module.$function($options)\"");
         $result = $process->output();
 
-        return collect(ScriptOutputTransformer::transform($result));
+        return ScriptOutputTransformer::transform($result);
     }
 
     public function where($filters): static

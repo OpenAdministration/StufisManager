@@ -4,6 +4,7 @@ namespace App\Runner\Check;
 
 use App\Runner\Runner;
 use App\Services\Hostsharing\Domain;
+use Illuminate\Support\Collection;
 
 class CheckHostsharingDomain extends Runner
 {
@@ -16,8 +17,8 @@ class CheckHostsharingDomain extends Runner
     {
         $searchResult = Domain::search(['name' => $this->instance->domain]);
 
-        if ($searchResult->count() !== 1) {
-            $this->log = "Count !== 1";
+        if (is_string($searchResult)) {
+            $this->log = $searchResult;
             return false;
         }
         $domain = $searchResult->first();
