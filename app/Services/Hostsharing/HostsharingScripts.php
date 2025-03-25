@@ -23,10 +23,15 @@ class HostsharingScripts
         $options = collect()->put('where', $this->where)->put('set', $this->set)->toJson();
         $process = Process::forever()
             ->input(config('services.hostsharing.password'))
-            ->run("hsscript -u $user -e \"$this->module.$function($options)\"");
-        $result = $process->output();
+            ->run("hsscript -u $user -e \"$this->module.$function($options)\"")
+            ->throw()
+        ;
 
-        return ScriptOutputTransformer::transform($result);
+        return ScriptOutputTransformer::transform($process->output());
+    }
+
+    private function cleanOutput(): string {
+
     }
 
     public function where($filters): static

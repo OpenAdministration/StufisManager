@@ -32,18 +32,15 @@ class ScriptOutputTransformer
         return $ret;
     }
 
-    public function parse($input): Collection|string
+    public function parse($input): Collection
     {
-        if(!str_starts_with($input, '[')) {
-            return "NO MATCH FOR: $input";
-        }
         $this->lexer->setInput($input);
         $this->lexer->moveNext();
 
         $this->lexer->moveNext();
         $token = $this->lexer->token;
 
-        return match ($token->type) {
+        return match ($token?->type) {
             ScriptOutputLexer::T_BEGIN_ARRAY => collect($this->newArray()),
         };
     }
