@@ -4,6 +4,7 @@ namespace App\Runner\Check;
 
 use App\Runner\Runner;
 use App\Services\Hostsharing\Domain;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class CheckHostsharingDomain extends Runner
@@ -21,9 +22,9 @@ class CheckHostsharingDomain extends Runner
             $this->log = $searchResult;
             return false;
         }
-        $domain = $searchResult->first();
+        $domain = Arr::dot((array) $searchResult->first());
 
-        $target = [
+        $target = Arr::dot([
             'name' => $this->instance->domain,
             'user' => $this->instance->linux_user,
             'fcgiphpbin' => '/usr/lib/cgi-bin/php8.2',
@@ -33,9 +34,10 @@ class CheckHostsharingDomain extends Runner
                 'letsencrypt',
                 'fastcgi',
             ],
-        ];
+        ]);
 
-        $diff = array_diff_assoc($target, (array) $domain);
+        $diff = array_diff_assoc($target, $domain); // <- not recursive, therfor dot and undot'ing of the arrays :'(
+
         $this->log = var_export($diff, true);
 
         return empty($diff);
