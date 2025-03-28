@@ -73,7 +73,7 @@ abstract class Runner
         }
     }
 
-    protected function addDiffList($key, array $target_array, array $actual_array)
+    protected function addDiffsList($key, array $target_array, array $actual_array)
     {
         $list = array_merge($target_array, $actual_array);
         $i = 0;
