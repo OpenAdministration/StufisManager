@@ -64,8 +64,8 @@ abstract class Runner
         return $this->result;
     }
 
-    protected function addDiffsAssoc($target, $actual){
-        $keys = array_merge(array_keys($actual), array_keys($target));
+    protected function addDiffsAssoc(array $target_array, array $actual_array){
+        $keys = array_merge(array_keys($actual_array), array_keys($target_array));
         foreach($keys as $key){
             $target = $target[$key] ?? '';
             $actual = $actual[$key] ?? '';
@@ -73,13 +73,13 @@ abstract class Runner
         }
     }
 
-    protected function addDiffsList($key, $target, $actual)
+    protected function addDiffList($key, array $target_array, array $actual_array)
     {
-        $list = array_merge($target, $actual);
+        $list = array_merge($target_array, $actual_array);
         $i = 0;
         foreach($list as $item){
-            $target = in_array($item, $target, true) ? $item : '';
-            $actual = in_array($item, $actual, true) ? $item : '';
+            $target = in_array($item, $target_array, true) ? $item : '';
+            $actual = in_array($item, $actual_array, true) ? $item : '';
             $this->addDiff($key . "." .  $i++, $target, $actual);
         }
     }
