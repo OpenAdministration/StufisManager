@@ -22,25 +22,24 @@ class CheckHostsharingDomain extends Runner
             $this->log = $searchResult;
             return false;
         }
-        $domain = Arr::dot((array) $searchResult->first());
+        $domain = (array) $searchResult->first();
+        $domainoptions = Arr::pull($domain, 'domainoptions');
 
-        $target = Arr::dot([
+        $target_general = [
             'name' => $this->instance->domain,
             'user' => $this->instance->linux_user,
             'fcgiphpbin' => '/usr/lib/cgi-bin/php8.2',
             'validsubdomainnames' => '',
-            'domainoptions' => [
-                'multiviews',
-                'letsencrypt',
-                'fastcgi',
-            ],
-        ]);
+        ];
+        $target_options =  [
+            'multiviews',
+            'letsencrypt',
+            'fastcgi',
+        ];
+        $this->addDiffs($target_general, $domain);
+        $this->addDiffs($target_options, $domainoptions);
 
-        $diff = array_diff_assoc($target, $domain); // <- not recursive, therfor dot and undot'ing of the arrays :'(
-
-        $this->log = var_export($diff, true);
-
-        return empty($diff);
+        return empty($this->diff);
 
     }
 }

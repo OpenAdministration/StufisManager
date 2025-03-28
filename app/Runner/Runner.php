@@ -14,6 +14,7 @@ abstract class Runner
 
     protected ?bool $result = null;
     protected ?string $log = null;
+    protected array $diff = [];
 
     public function __construct(public Instance $instance){}
 
@@ -62,5 +63,22 @@ abstract class Runner
         return $this->result;
     }
 
+    protected function addDiffs($target, $actual){
+        $keys = array_merge(array_keys($actual), array_keys($target));
+        foreach($keys as $key){
+            $target = $target[$key] ?? '';
+            $actual = $actual[$key] ?? '';
+            $this->addDiff($key, $target, $actual);
+        }
+    }
 
+    protected function addDiff($key, $target, $actual)
+    {
+        if($target !== $actual){
+            $this->diff[$key] = [
+                'target' => $target,
+                'actual' => $actual,
+            ];
+        }
+    }
 }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('instance_id')->constrained();
             $table->string('name');
             $table->boolean('result');
-            $table->text('log');
+            $table->text('log')->default('');
+            $table->json('diff')->default('{}');
             $table->timestamps();
         });
 

@@ -10,6 +10,15 @@ class Report extends Model
         'instance_id',
         'name',
         'result',
-        'log'
+        'log',
+        'diff' // json
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'diff' => 'array',
+        ];
+    }
+
 }
