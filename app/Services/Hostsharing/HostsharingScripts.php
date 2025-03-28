@@ -20,7 +20,14 @@ class HostsharingScripts
     public function execute($function = 'search'): Collection|string
     {
         $user = config('services.hostsharing.user');
-        $options = collect()->put('where', $this->where)->put('set', $this->set)->toJson();
+        $options = collect();
+        if(!empty($this->where)){
+            $options->put('where', $this->where);
+        }
+        if(!empty($this->set)){
+            $options->put('set', $this->set);
+        }
+        $options = $options->toJson();
         $process = Process::forever()
             ->input(config('services.hostsharing.password'))
             ->run("hsscript -u $user -e '$this->module.$function($options)'")
