@@ -48,6 +48,7 @@ abstract class Runner
             'name' => $this->name,
             'result' => $this->result,
             'log' => $this->log,
+            'diff' => $this->diff,
         ]);
     }
 
