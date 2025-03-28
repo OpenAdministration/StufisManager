@@ -64,12 +64,23 @@ abstract class Runner
         return $this->result;
     }
 
-    protected function addDiffs($target, $actual){
+    protected function addDiffsAssoc($target, $actual){
         $keys = array_merge(array_keys($actual), array_keys($target));
         foreach($keys as $key){
             $target = $target[$key] ?? '';
             $actual = $actual[$key] ?? '';
             $this->addDiff($key, $target, $actual);
+        }
+    }
+
+    protected function addDiffList($key, $target, $actual)
+    {
+        $list = array_merge($target, $actual);
+        $i = 0;
+        foreach($list as $item){
+            $target = in_array($item, $target, true) ? $item : '';
+            $actual = in_array($item, $actual, true) ? $item : '';
+            $this->addDiff($key . "." .  $i++, $target, $actual);
         }
     }
 
