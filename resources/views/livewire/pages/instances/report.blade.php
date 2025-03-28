@@ -13,9 +13,11 @@
                 </flux:table.columns>
                 <flux:table.rows>
                     @foreach($lastResult->diff as $key => $diff)
-                        <flux:table.row>{{ $key }}</flux:table.row>
-                        <flux:table.row>{{ $diff['target'] }}</flux:table.row>
-                        <flux:table.row>{{ $diff['actual'] }}</flux:table.row>
+                        <flux:table.row>
+                            <flux:table.cell>{{ $key }}</flux:table.cell>
+                            <flux:table.cell>{{ $diff['target'] }}</flux:table.cell>
+                            <flux:table.cell>{{ $diff['actual'] }}</flux:table.cell>
+                        </flux:table.row>
                     @endforeach
                 </flux:table.rows>
             </flux:table>
