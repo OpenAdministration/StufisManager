@@ -36,8 +36,8 @@ class CheckHostsharingDomain extends Runner
             'letsencrypt',
             'fastcgi',
         ];
-        $this->addDiffs($target_general, $domain);
-        $this->addDiffs($target_options, $domainoptions);
+        $this->addDiffsAssoc($target_general, $domain);
+        $this->addDiffsList('domainoptions', $target_options, $domainoptions);
 
         return empty($this->diff);
 
