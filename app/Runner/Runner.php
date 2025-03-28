@@ -13,7 +13,7 @@ abstract class Runner
     protected string $name;
 
     protected ?bool $result = null;
-    protected ?string $log = null;
+    protected string $log = '';
     protected array $diff = [];
 
     public function __construct(public Instance $instance){}
